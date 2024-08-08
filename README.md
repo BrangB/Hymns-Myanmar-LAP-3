@@ -1,4 +1,4 @@
-# Project Title
+# Hymns Myanmar
 
 ## Getting Started
 
@@ -7,7 +7,7 @@ Follow these steps to set up and start developing:
 1. **Clone the repository:**
 
     ```sh
-    git clone "link"
+    git clone "https://github.com/BrangB/Hymns-Myanmar-LAP-3.git"
     ```
 
 2. **Install dependencies:**
