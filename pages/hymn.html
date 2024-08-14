@@ -23,7 +23,7 @@
         // Function to fetch hymn details based on hymnId
         const fetchHymns = async (hymnId) => {
             try {
-                const response = await fetch(`http://hymnsmyanmar.000.pe/backend/api.php?id=${hymnId}`);
+                const response = await fetch(`http://localhost/hymnsmyanmar/backend/api.php?id=${hymnId}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
