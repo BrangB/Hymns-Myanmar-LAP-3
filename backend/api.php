@@ -5,13 +5,11 @@ header('Content-Type: application/json; charset=UTF-8');
 // Include the database connection
 include 'db.php';
 
-// Set the charset for the connection to ensure proper encoding
 $conn->set_charset("utf8mb4");
 
 // Hymn ID
 $hymn_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
 
-// Execute SQL query to fetch hymn, verses, and choruses
 $sql = "
     SELECT hymns.hymn_id, hymns.burmeseTitle, hymns.englishTitle, hymns.author, hymns.publishedYear, hymns.hymnNumber, hymns.bibleVerse, categories.categoryName,
            verses.verseNumber, verses.text AS verseText, 
@@ -68,7 +66,6 @@ if ($result->num_rows > 0) {
     echo json_encode(array("message" => "Hymn not found."), JSON_UNESCAPED_UNICODE);
 }
 
-// Close the connection
 $conn->close();
 
 ?>
