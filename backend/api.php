@@ -1,9 +1,12 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 
 // Include the database connection
 include 'db.php';
+
+// Set the charset for the connection to ensure proper encoding
+$conn->set_charset("utf8mb4");
 
 // Hymn ID
 $hymn_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
@@ -60,9 +63,9 @@ if ($result->num_rows > 0) {
         $hymn_data['choruses'] = $choruses;
     }
 
-    echo json_encode($hymn_data);
+    echo json_encode($hymn_data, JSON_UNESCAPED_UNICODE);
 } else {
-    echo json_encode(array("message" => "Hymn not found."));
+    echo json_encode(array("message" => "Hymn not found."), JSON_UNESCAPED_UNICODE);
 }
 
 // Close the connection
