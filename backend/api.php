@@ -12,7 +12,7 @@ $hymn_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
 $sql = "
     SELECT hymns.hymn_id, hymns.burmeseTitle, hymns.englishTitle, hymns.author, hymns.publishedYear, hymns.hymnNumber, hymns.bibleVerse, categories.categoryName,
            verses.verseNumber, verses.text AS verseText, 
-           choruses.text AS chorusText
+           choruses.chorusNumber, choruses.text AS chorusText
     FROM hymns
     LEFT JOIN verses ON hymns.hymn_id = verses.hymn_id
     LEFT JOIN choruses ON hymns.hymn_id = choruses.hymn_id
@@ -23,6 +23,7 @@ $sql = "
 $result = $conn->query($sql);
 
 $hymn_data = array();
+$choruses = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -45,11 +46,20 @@ if ($result->num_rows > 0) {
         }
 
         if (!empty($row['chorusText'])) {
-            $hymn_data['choruses'][] = [
+            $choruses[] = [
+                'chorusNumber' => $row['chorusNumber'],
                 'text' => $row['chorusText'],
             ];
         }
     }
+
+    // Check if the choruses array is empty
+    if (empty($choruses)) {
+        $hymn_data['choruses'] = "N/A";
+    } else {
+        $hymn_data['choruses'] = $choruses;
+    }
+
     echo json_encode($hymn_data);
 } else {
     echo json_encode(array("message" => "Hymn not found."));
@@ -57,4 +67,5 @@ if ($result->num_rows > 0) {
 
 // Close the connection
 $conn->close();
+
 ?>

@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.8"
+  },
+  "dependencies": {
+    "qrjs2": "^0.1.11"
   }
 }
