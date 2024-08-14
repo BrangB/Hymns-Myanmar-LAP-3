@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="../css/output.css">
     <title>Hymns Myanmar</title>
 </head>
@@ -24,7 +23,7 @@
         // Function to fetch hymn details based on hymnId
         const fetchHymns = async (hymnId) => {
             try {
-                const response = await fetch(`http://hymnsmyanmar.000.pe/backend/api.php?id=${hymnId}`);
+                const response = await fetch(`https://hymnsmyanmar.000.pe/backend/api.php?id=${hymnId}`, { mode: 'no-cors'});
                 if (!response.ok) {
                     throw new Error("Network response was not ok!");
                 }
@@ -76,6 +75,5 @@
             console.error("Hymn ID not found in the URL.");
         }
     </script>
-    
 </body>
 </html>
