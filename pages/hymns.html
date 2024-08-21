@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hymns</title>
+    <link rel="stylesheet" href="../css/output.css">
+</head>
+<body>
+    
+    <div class="mainContainer w-screen flex flex-col items-start justify-center">
+    </div>
+
+    <script>
+
+        const mainContainer = document.querySelector(".mainContainer");
+        const hymn = document.querySelector(".hymn");
+
+        const handleHymn = (id) => {
+            console.log(id);
+        }
+
+        const fetchHymns = async (hymnId) => {
+              try {
+                  const response = await fetch(`http://localhost/hymnsmyanmar/backend/hymns.php`);
+                  if (!response.ok) {
+                      throw new Error("Network response was not ok");
+                  }
+                  hymns = await response.json();
+                  console.log(hymns)
+                  hymns.map(hymn => {
+                        mainContainer.innerHTML += `
+                            <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
+                                <p>${hymn.hymnNumber}</p>
+                                <h1>${hymn.burmeseTitle}</h1>
+                                <p>${hymn.bibleVerse}</p>
+                                <p>${hymn.categoryName}</p>
+                                <p>${hymn.author}</p>
+                            </a>
+                        `
+                    })
+                  
+              } catch (error) {
+                  console.error("Failed to fetch hymns:", error);
+              }
+          };
+
+          fetchHymns();
+    </script>
+</body>
+</html>
