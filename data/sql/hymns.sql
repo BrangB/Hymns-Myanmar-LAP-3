@@ -9,4 +9,5 @@ VALUES
 (7, 'တရားနေမင်းကျူး', 'Sun of my soul, Thou saviour dear', 'William H. Mone (1823-1887)', 'N/A', '၀၀၇', 'လု၊ ၂၄း၂၉', 2),
 (8, 'ကိုယ်တော်အပါး ချဉ်းကပ်ကျူး', 'At even ere the sun was set', 'Johann G. W. Scheffler', 'N/A', '၀၀၈', 'လု၊ ၉း၁၁', 2),
 (9, 'နေမဝင်မီ ဆုတောင်းကျူး', 'I love to steal awhile away', 'D. Dulton', 'N/A', '၀၀၉', 'ဆာ၊ ၅၁', 2),
-(10, 'ညဉ့်ဉီးယံ ဂုဏ်တော်ကျူး', 'Glory to thee, my God, this night', 'Thomas Tallot (1509-1585)', 'N/A', '၀၁၀', 'N/A', 2);
+(10, 'ညဉ့်ဉီးယံ ဂုဏ်တော်ကျူး', 'Glory to thee, my God, this night', 'Thomas Tallot (1509-1585)', 'N/A', '၀၁၀', 'N/A', 2),
+(11, 'နေဝင်ချိန်ကျူး', 'The day Thou gavest, Lord, is ended', )
