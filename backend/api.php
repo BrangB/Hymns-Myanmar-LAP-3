@@ -1,6 +1,15 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=UTF-8');
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json; charset=utf-8');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit();
+}
 
 // Include the database connection
 include 'db.php';
@@ -26,7 +35,6 @@ $sql = "
 $result = $conn->query($sql);
 
 $hymn_data = array();
-$choruses = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -49,7 +57,7 @@ if ($result->num_rows > 0) {
         }
 
         if (!empty($row['chorusText'])) {
-            $choruses[] = [
+            $hymn_data['choruses'][] = [
                 'chorusNumber' => $row['chorusNumber'],
                 'text' => $row['chorusText'],
             ];
