@@ -19,6 +19,9 @@ bower_components/
 /dist
 /coverage
 
+# Ignore output.css
+css/output.css
+
 # Temporary files
 *.tmp
 *.temp
