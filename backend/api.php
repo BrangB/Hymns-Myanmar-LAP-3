@@ -1,15 +1,23 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=UTF-8');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json; charset=utf-8');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit();
+}
 
 // Include the database connection
 include 'db.php';
 
-// Set the charset (fix burmese text ????? error)
+// Set the charset for the connection to ensure proper encoding
 $conn->set_charset("utf8mb4");
 
+// Hymn ID
 $hymn_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
 
 // Execute SQL query to fetch specific hymn data
@@ -27,7 +35,6 @@ $sql = "
 $result = $conn->query($sql);
 
 $hymn_data = array();
-$choruses = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -50,7 +57,7 @@ if ($result->num_rows > 0) {
         }
 
         if (!empty($row['chorusText'])) {
-            $choruses[] = [
+            $hymn_data['choruses'][] = [
                 'chorusNumber' => $row['chorusNumber'],
                 'text' => $row['chorusText'],
             ];

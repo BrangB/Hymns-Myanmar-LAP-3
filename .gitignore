@@ -19,6 +19,9 @@ bower_components/
 /dist
 /coverage
 
+# Ignore output.css
+css/output.css
+
 # Temporary files
 *.tmp
 *.temp
@@ -56,6 +59,7 @@ out/
 !.yarn/versions
 
 # Misc
+.env
 *.env.local
 *.env.development.local
 *.env.test.local
