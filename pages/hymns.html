@@ -5,47 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hymns</title>
     <link rel="stylesheet" href="../css/output.css">
+    <link rel="stylesheet" href="../css/input.css">
 </head>
-<body>
+<body class="bg-[#075C4D]">
     
-    <div class="mainContainer w-screen flex flex-col items-start justify-center">
+    <div id="loadingScreen" class="absolute top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic">
+        <p class="animate-pulse">Hymn Myanmar</p>
+    </div>
+    <div class="mainContainer text-white w-screen flex flex-col items-center justify-center">
+        <div class="hymns p-8 flex flex-col gap-4">
+            
+        </div>
     </div>
 
     <script>
+        const hymnsContainer = document.querySelector(".hymns");
+        const loadingScreen = document.getElementById("loadingScreen");
 
-        const mainContainer = document.querySelector(".mainContainer");
-        const hymn = document.querySelector(".hymn");
+        const backendApi = "http://localhost/hymnsmyanmar";
 
-        const handleHymn = (id) => {
-            console.log(id);
-        }
+        const fetchHymns = async () => {
+            try {
+                // Show the loading screen
+                loadingScreen.classList.remove("hidden");
+                loadingScreen.classList.add("flex");
 
-        const fetchHymns = async (hymnId) => {
-              try {
-                  const response = await fetch(`http://localhost/hymnsmyanmar/backend/hymns.php`);
-                  if (!response.ok) {
-                      throw new Error("Network response was not ok");
-                  }
-                  hymns = await response.json();
-                  console.log(hymns)
-                  hymns.map(hymn => {
-                        mainContainer.innerHTML += `
-                            <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
-                                <p>${hymn.hymnNumber}</p>
-                                <h1>${hymn.burmeseTitle}</h1>
-                                <p>${hymn.bibleVerse}</p>
-                                <p>${hymn.categoryName}</p>
-                                <p>${hymn.author}</p>
-                            </a>
-                        `
-                    })
-                  
-              } catch (error) {
-                  console.error("Failed to fetch hymns:", error);
-              }
-          };
+                const response = await fetch(`${backendApi}/backend/hymns.php`);
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const hymns = await response.json();
+                console.log(hymns);
 
-          fetchHymns();
+                hymns.map(hymn => {
+                    hymnsContainer.innerHTML += `
+                        <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
+                            <p>${hymn.hymnNumber}</p>
+                            <h1>${hymn.burmeseTitle}</h1>
+                            <p>${hymn.bibleVerse}</p>
+                            <p>${hymn.categoryName}</p>
+                            <p>${hymn.author}</p>
+                        </a>
+                        <hr>
+                    `;
+                });
+            } catch (error) {
+                console.error("Failed to fetch hymns:", error);
+            } finally {
+                // Hide the loading screen
+                loadingScreen.classList.remove("flex");
+                loadingScreen.classList.add("hidden");
+            }
+        };
+
+        fetchHymns();
     </script>
 </body>
 </html>

@@ -1,57 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="css/output.css">
-      <title>Hymns Myanmar</title>
-  </head>
-  <body>
-      <div class="mainContainer p-12">
-        <ul class="hymns flex items-start justify-center gap-5 flex-col">
-        </ul>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hymns Myanmar</title>
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/input.css">
 
-      <script>
-          let hymns;
+</head>
+<body class="overflow-hidden">
+    <nav class="w-screen fixed text-white top-0 left-0 p-6 px-12 bg-transparent backdrop:blur-md flex items-center justify-between">
+        <div class="logo font-extrabold text-xl text-center italic text-[#E2E46E]">Hymn Myanmar</div>
+        <div class="navbar">
+            <ul class="flex gap-6 items-center text-sm justify-center uppercase font-light font">
+                <li class="cursor-pointer">Home</li>
+                <li class="cursor-pointer">Feature</li>
+                <li class="cursor-pointer">About Us</li>
+                <li class="cursor-pointer">Contact Us</li>
+            </ul>
+        </div>
+        <a href="pages/hymns.html" class="bg-[#0D9678] p-2 px-3 flex text-center items-center justify-center rounded-md">
+            Explore
+        </a>
+    </nav>
+    <div class="mainContainer bg-[#075C4D] w-screen h-screen">
 
-          const fetchHymns = async (hymnId) => {
-              try {
-                  const response = await fetch(`http://localhost/hymnsmyanmar/backend/api.php?id=${hymnId}`);
-                  if (!response.ok) {
-                      throw new Error("Network response was not ok");
-                  }
-                  hymns = await response.json();
-                  console.log(hymns);
-                  
-                  const container = document.querySelector(".hymns");
-
-                  // Determine the maximum length of verses and choruses
-                  const maxLength = Math.max(hymns.verses.length, hymns.choruses.length);
-
-                  for (let i = 0; i < maxLength; i++) {
-                      if (i < hymns.verses.length) {
-                          container.innerHTML += ` 
-                              <li>
-                                  ${hymns.verses[i].text}
-                              </li>
-                          `;
-                      }
-                      if (hymns.choruses != "N/A" && i < hymns.choruses.length) {
-                          container.innerHTML += ` 
-                              <li class="chorus">
-                                  ${hymns.choruses[i].text}
-                              </li>
-                          `;
-                      }
-                  }
-
-              } catch (error) {
-                  console.error("Failed to fetch hymns:", error);
-              }
-          };
-
-          fetchHymns(4);
-      </script>
-  </body>
+    </div>
+</body>
 </html>
