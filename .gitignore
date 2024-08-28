@@ -20,7 +20,7 @@ bower_components/
 /coverage
 
 # Ignore output.css
-css/output.css
+# css/output.css
 
 # Temporary files
 *.tmp
