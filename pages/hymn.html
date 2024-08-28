@@ -22,7 +22,8 @@
 
     <script>
 
-        const backendApi = "http://localhost/hymnsmyanmar";
+        // const backendApi = "http://localhost/hymnsmyanmar";
+        const backendApi = "https://hymns-myanmar-vercel.onrender.com/";
 
         const getQueryParam = (param) => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -39,7 +40,8 @@
                 loadingScreen.classList.remove("hidden");
                 loadingScreen.classList.add("flex");
 
-                const response = await fetch(`${backendApi}/backend/api.php?id=${hymnId}`);
+                // const response = await fetch(`${backendApi}/backend/api.php?id=${hymnId}`);
+                const response = await fetch(`${backendApi}/api/index.php?id=${hymnId}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }

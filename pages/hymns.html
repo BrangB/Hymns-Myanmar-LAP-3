@@ -23,7 +23,8 @@
         const hymnsContainer = document.querySelector(".hymns");
         const loadingScreen = document.getElementById("loadingScreen");
 
-        const backendApi = "http://localhost/hymnsmyanmar";
+        // const backendApi = "http://localhost/hymnsmyanmar";
+        const backendApi = "https://hymns-myanmar-vercel.onrender.com/";
 
         const fetchHymns = async () => {
             try {
@@ -31,7 +32,8 @@
                 loadingScreen.classList.remove("hidden");
                 loadingScreen.classList.add("flex");
 
-                const response = await fetch(`${backendApi}/backend/hymns.php`);
+                // const response = await fetch(`${backendApi}/backend/hymns.php`);
+                const response = await fetch(`${backendApi}/api/hymns.php`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
