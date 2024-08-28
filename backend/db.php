@@ -4,9 +4,9 @@
 
 // Database connection parameters
 // $servername = "sql12.freesqldatabase.com";
-// $username = "sql12725901";
-// $password = "KNcp87Xjdr";
-// $dbname = "sql12725901";
+// $username = "sql12728284";
+// $password = "D5ucZQK3Vu";
+// $dbname = "sql12728284";
 
 $servername = "localhost";
 $username = "root";
