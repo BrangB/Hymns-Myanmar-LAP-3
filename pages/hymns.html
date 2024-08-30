@@ -11,7 +11,7 @@
   <body class="bg-[#075C4D] overflow-x-hidden">
     <div
       id="loadingScreen"
-      class="absolute top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic"
+      class="fixed top-0 left-0 w-screen h-screen z-50 items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic"
     >
       <p class="animate-pulse">Hymn Myanmar</p>
     </div>
@@ -24,17 +24,35 @@
         placeholder="Hymns Name"
         class="p-2 mt-4 bg-transparent outline-none border border-[#E2E46E]"
       />
-      <div class="hymns p-8 flex flex-col gap-4"></div>
+      <div class="hymns p-8 py-12 flex flex-col gap-4"></div>
+      <div class="flex my-6">
+        <!-- Previous Button -->
+        <div id="prev"  class="flex cursor-pointer items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+          </svg>
+          Previous
+        </div>
+        <div id="next" class="flex cursor-pointer items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Next
+          <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
     <script>
       const hymnsContainer = document.querySelector(".hymns");
       const hymnInput = document.getElementById("hymnInput");
       const loadingScreen = document.getElementById("loadingScreen");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
 
     //  const backendApi = "https://hymns-myanmar-vercel.onrender.com/api/hymns.php";
     const backendApi = "http://localhost/hymnsmyanmar/backend/hymns.php";
-    let page = 2;
+    let page = 1;
+    let total_page = null;
 
       const fetchHymnsByName = async (hymnName = "") => {
         try {
@@ -61,7 +79,8 @@
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          const hymns = await response.json();
+          const data = await response.json();
+          const hymns = await data.hymns;
 
           // Clear the loading indicator
           hymnsContainer.innerHTML = "";
@@ -114,8 +133,10 @@
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          const hymns = await response.json();
-
+          const data = await response.json();
+          const hymns = await data.hymns;
+          page = await data.current_page;
+          total_page = await data.total_pages;
           // Display all hymns
           hymnsContainer.innerHTML = "";
           hymns.map((hymn) => {
@@ -152,6 +173,20 @@
 
       // Fetch hymns on page load
       window.onload = () => {
+
+        prev.addEventListener("click", () => {
+      if(page > 1){
+        page--
+        fetchHymns()
+      }
+    })
+
+    next.addEventListener("click", () => {
+      if(total_page > page){
+        page++
+        fetchHymns()
+      }
+    })
         const urlParams = new URLSearchParams(window.location.search);
         const hymnName = urlParams.get("hymnname") || "";
         hymnInput.value = hymnName; // Set input value to hymn name from URL
