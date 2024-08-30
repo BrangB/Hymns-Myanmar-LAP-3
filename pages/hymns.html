@@ -1,67 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hymns</title>
-    <link rel="icon" href="../assets/favicon.png">
-    <link rel="stylesheet" href="../css/output.css">
-    <link rel="stylesheet" href="../css/input.css">
-</head>
-<body class="bg-[#075C4D]">
-    
-    <div id="loadingScreen" class="absolute top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic">
-        <p class="animate-pulse">Hymn Myanmar</p>
+    <link rel="icon" href="../assets/favicon.png" />
+    <link rel="stylesheet" href="../css/output.css" />
+    <link rel="stylesheet" href="../css/input.css" />
+  </head>
+  <body class="bg-[#075C4D] overflow-x-hidden">
+    <div
+      id="loadingScreen"
+      class="absolute top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic"
+    >
+      <p class="animate-pulse">Hymn Myanmar</p>
     </div>
-    <div class="mainContainer text-white w-screen flex flex-col items-center justify-center">
-        <div class="hymns p-8 flex flex-col gap-4">
-            
-        </div>
+    <div
+      class="mainContainer text-white w-screen flex flex-col items-center justify-center"
+    >
+      <input
+        id="hymnInput"
+        type="text"
+        placeholder="Hymns Name"
+        class="p-2 mt-4 bg-transparent outline-none border border-[#E2E46E]"
+      />
+      <div class="hymns p-8 flex flex-col gap-4"></div>
     </div>
 
     <script>
-        const hymnsContainer = document.querySelector(".hymns");
-        const loadingScreen = document.getElementById("loadingScreen");
+      const hymnsContainer = document.querySelector(".hymns");
+      const hymnInput = document.getElementById("hymnInput");
+      const loadingScreen = document.getElementById("loadingScreen");
 
-        // const backendApi = "http://localhost/hymnsmyanmar";
-        const backendApi = "https://hymns-myanmar-vercel.onrender.com/";
+    //  const backendApi = "https://hymns-myanmar-vercel.onrender.com/api/hymns.php";
+    const backendApi = "http://localhost/hymnsmyanmar/backend/hymns.php";
+    let page = 2;
 
-        const fetchHymns = async () => {
-            try {
-                // Show the loading screen
-                loadingScreen.classList.remove("hidden");
-                loadingScreen.classList.add("flex");
+      const fetchHymnsByName = async (hymnName = "") => {
+        try {
+          // Clear the container before appending new data
+          hymnsContainer.innerHTML = "";
 
-                // const response = await fetch(`${backendApi}/backend/hymns.php`);
-                const response = await fetch(`${backendApi}/api/hymns.php`);
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const hymns = await response.json();
-                console.log(hymns);
+          // Show the loading indicator inside hymns div
+          hymnsContainer.innerHTML = `
+                    <div id="filterLoading" class="text-[#E2E46E] font-bold text-xl italic">
+                        Loading hymns...
+                    </div>
+                `;
 
-                hymns.map(hymn => {
-                    hymnsContainer.innerHTML += `
+          // Update the URL with the hymn name parameter
+          const url = new URL(window.location.href);
+          url.searchParams.set("hymnname", hymnName);
+          url.searchParams.set("page", page);
+          window.history.pushState({}, "", url);
+
+          // Fetch the hymns based on the hymn name
+          const response = await fetch(
+            `${backendApi}?page=${page}&hymnname=${hymnName}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const hymns = await response.json();
+
+          // Clear the loading indicator
+          hymnsContainer.innerHTML = "";
+
+          // Map through hymns and display them
+          if (hymns.length > 0) {
+            hymns.map((hymn) => {
+              hymnsContainer.innerHTML += `
+                            <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
+                                <p>${hymn.hymnNumber}</p>
+                                <h1>${hymn.burmeseTitle}</h1>
+                                <h1>${hymn.englishTitle}</h1>
+                                <p>${hymn.bibleVerse}</p>
+                                <p>${hymn.categoryName}</p>
+                                <p>${hymn.author}</p>
+                            </a>
+                            <hr>
+                        `;
+            });
+          } else {
+            hymnsContainer.innerHTML = `
+                        <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
+                    `;
+          }
+        } catch (error) {
+          console.error("Failed to fetch hymns:", error);
+          hymnsContainer.innerHTML = `
+                    <p class="text-[#E2E46E] font-bold italic">Failed to load hymns. Please try again later.</p>
+                `;
+        }
+      };
+
+      // Function to fetch all hymns on page load
+      const fetchHymns = async () => {
+        try {
+          // Show the loading screen
+          loadingScreen.classList.remove("hidden");
+          loadingScreen.classList.add("flex");
+          
+          const url = new URL(window.location.href);
+
+          if (url.searchParams.has("hymnname")) {
+            url.searchParams.delete("hymnname");
+          }
+          url.searchParams.set("page", page);
+          window.history.pushState({}, "", url);
+
+          // Fetch all hymns
+          const response = await fetch(`${backendApi}?page=${page}`);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const hymns = await response.json();
+
+          // Display all hymns
+          hymnsContainer.innerHTML = "";
+          hymns.map((hymn) => {
+            hymnsContainer.innerHTML += `
                         <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
                             <p>${hymn.hymnNumber}</p>
                             <h1>${hymn.burmeseTitle}</h1>
+                            <h1>${hymn.englishTitle}</h1>
                             <p>${hymn.bibleVerse}</p>
                             <p>${hymn.categoryName}</p>
                             <p>${hymn.author}</p>
                         </a>
                         <hr>
                     `;
-                });
-            } catch (error) {
-                console.error("Failed to fetch hymns:", error);
-            } finally {
-                // Hide the loading screen
-                loadingScreen.classList.remove("flex");
-                loadingScreen.classList.add("hidden");
-            }
-        };
+          });
+        } catch (error) {
+          console.error("Failed to fetch hymns:", error);
+        } finally {
+          // Hide the loading screen
+          loadingScreen.classList.remove("flex");
+          loadingScreen.classList.add("hidden");
+        }
+      };
 
-        fetchHymns();
+      // Event listener for the input field to trigger fetchHymnsByName on keyup
+      hymnInput.addEventListener("keyup", (event) => {
+        const hymnName = event.target.value;
+        if (hymnName) {
+          fetchHymnsByName(hymnName);
+        } else {
+          fetchHymns();
+        }
+      });
+
+      // Fetch hymns on page load
+      window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hymnName = urlParams.get("hymnname") || "";
+        hymnInput.value = hymnName; // Set input value to hymn name from URL
+        if (hymnName) {
+          fetchHymnsByName(hymnName);
+        } else {
+          fetchHymns();
+        }
+      };
     </script>
-</body>
+  </body>
 </html>
