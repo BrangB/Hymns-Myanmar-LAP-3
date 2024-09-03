@@ -6,12 +6,17 @@
     <link rel="icon" href="../assets/favicon.png">
     <link rel="stylesheet" href="../css/output.css">
     <link rel="stylesheet" href="../css/input.css">
+    <script src="https://kit.fontawesome.com/391e4d0740.js" crossorigin="anonymous"></script>
     <title>Hymns Myanmar</title>
 </head>
 <body class="bg-[#075C4D] overflow-x-hidden">
     <!-- Loading Screen -->
-    <div id="loadingScreen" class="absolute top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic">
+    <div id="loadingScreen" class="absolute z-40 top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic">
         <p class="animate-pulse">Hymn Myanmar</p>
+    </div>
+
+    <div onclick="location.href='hymns.html'" class="goback fixed z-20 w-[40px] h-[40px] rounded-full animate-bounce top-24 cursor-pointer left-5  flex items-center justify-center bg-[#E2E46E] ">
+        <i class="fa-solid fa-arrow-left text-[#0b2521] text-lg"></i>
     </div>
 
     <div class="overlayQr cursor-pointer pointer-events-none opacity-0 duration-300 w-screen h-screen backdrop-blur-md fixed top-0 left-0 flex items-center justify-center">
@@ -23,12 +28,12 @@
 
     <div class="mainContainer p-12 px-8 md:px-20 flex flex-col text-white gap-12 items-center justify-center w-screen">
         <div class="header w-full flex items-center justify-between">
-            <div class="category text-lg"></div>
-            <div class="hymnNumber text-xl"></div>
+            <div class="category text-lg myanmarfont"></div>
+            <div class="hymnNumber text-xl myanmarfont"></div>
         </div>
         <div class="hymn w-full flex items-center justify-center flex-col gap-16">
             <div class="hymnHeader flex flex-col items-center justify-center gap-4">
-                <div class="burmeseTitle text-2xl text-center"></div>
+                <div class="burmeseTitle font-semibold text-2xl text-center myanmarfont"></div>
                 <div class="englishTitle text-lg font-light text-center"></div>
                 <div class="bibleVerse text-lg text-center"></div>
             </div>
@@ -95,7 +100,7 @@
                 for (let i = 0; i < maxLength; i++) {
                     if (i < hymns.verses.length) {
                         hymnBody.innerHTML += ` 
-                            <li class="text-xl text-left">
+                            <li class="text-xl text-left myanmarfont">
                                 ${hymns.verses[i].text}
                             </li>
                         `;

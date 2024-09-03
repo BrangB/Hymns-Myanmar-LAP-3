@@ -7,6 +7,7 @@
     <link rel="icon" href="../assets/favicon.png" />
     <link rel="stylesheet" href="../css/output.css" />
     <link rel="stylesheet" href="../css/input.css" />
+    <script src="https://kit.fontawesome.com/391e4d0740.js" crossorigin="anonymous"></script>
   </head>
   <body class="bg-[#075C4D] overflow-x-hidden">
     <div
@@ -22,9 +23,9 @@
         id="hymnInput"
         type="text"
         placeholder="Hymns Name"
-        class="p-2 mt-4 bg-transparent outline-none border border-[#E2E46E]"
+        class="p-2 mt-4 bg-transparent outline-none border border-[#e2e46ea8]"
       />
-      <div class="hymns p-8 py-12 flex flex-col gap-4"></div>
+      <div class="hymns px-3 md:px-12 lg:px-24 py-12 flex flex-col gap-4"></div>
       <div class="flex my-6">
         <!-- Previous Button -->
         <div id="prev"  class="flex cursor-pointer items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -54,14 +55,46 @@
     let page = 1;
     let total_page = null;
 
-      const fetchHymnsByName = async (hymnName = "") => {
+
+      const insertHymns = (hymns) => {
+        hymnsContainer.innerHTML += `
+              <table class="w-full text-left table-fixed">
+                <thead>
+                  <tr>
+                    <th class="w-[18%] md:p-2 md:w-[10%] py-2 text-sm md:text-lg">Number</th>
+                    <th class="w-[37%] md:p-2 md:w-[20%] py-2 text-sm md:text-lg">Burmese Title</th>
+                    <th class="w-[30%] md:p-2 md:w-[25%] py-2 text-sm md:text-lg">English Title</th>
+                    <th class="w-[15%] md:p-2 py-2 hidden md:table-cell text-sm md:text-lg">Bible Verse</th>
+                    <th class="w-[20%] md:p-2 md:w-[10%] py-2 text-sm md:text-lg">Category</th>
+                    <th class="w-[20%] md:p-2 py-2 hidden md:table-cell text-sm md:text-lg">Author</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${hymns.map(hymn => `
+                    <tr class="hymn cursor-pointer hover:bg-[#e2e46e9f] duration-300" onclick="location.href='hymn.html?id=${hymn.hymn_id}'">
+                      <td class="p-2 py-4 text-md md:text-lg">${hymn.hymnNumber}</td>
+                      <td class="p-2 py-4 text-md md:text-lg myanmarfont">${hymn.burmeseTitle}</td>
+                      <td class="p-2 text-sm md:text-[15px] py-4">${hymn.englishTitle}</td>
+                      <td class="p-2 py-4 hidden md:block">${hymn.bibleVerse}</td>
+                      <td class="p-2 py-4 md:text-lg myanmarfont">${hymn.categoryName}</td>
+                      <td class="p-2 py-4 hidden md:block">${hymn.author}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6" class="border-b border-gray-200"></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            `;
+      }
+      const fetchHymnsByName = async (hymnName) => {
         try {
           // Clear the container before appending new data
           hymnsContainer.innerHTML = "";
 
           // Show the loading indicator inside hymns div
           hymnsContainer.innerHTML = `
-                    <div id="filterLoading" class="text-[#E2E46E] font-bold text-xl italic">
+                    <div id="filterLoading" class="text-[#E2E46E] h-[300px] font-bold text-xl italic">
                         Loading hymns...
                     </div>
                 `;
@@ -87,24 +120,13 @@
 
           // Map through hymns and display them
           if (hymns.length > 0) {
-            hymns.map((hymn) => {
-              hymnsContainer.innerHTML += `
-                            <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
-                                <p>${hymn.hymnNumber}</p>
-                                <h1>${hymn.burmeseTitle}</h1>
-                                <h1>${hymn.englishTitle}</h1>
-                                <p>${hymn.bibleVerse}</p>
-                                <p>${hymn.categoryName}</p>
-                                <p>${hymn.author}</p>
-                            </a>
-                            <hr>
-                        `;
-            });
+            insertHymns(hymns)
           } else {
             hymnsContainer.innerHTML = `
-                        <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
-                    `;
+              <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
+            `
           }
+
         } catch (error) {
           console.error("Failed to fetch hymns:", error);
           hymnsContainer.innerHTML = `
@@ -137,21 +159,17 @@
           const hymns = await data.hymns;
           page = await data.current_page;
           total_page = await data.total_pages;
-          // Display all hymns
+
           hymnsContainer.innerHTML = "";
-          hymns.map((hymn) => {
-            hymnsContainer.innerHTML += `
-                        <a href="hymn.html?id=${hymn.hymn_id}" class="hymn flex gap-3 cursor-pointer">
-                            <p>${hymn.hymnNumber}</p>
-                            <h1>${hymn.burmeseTitle}</h1>
-                            <h1>${hymn.englishTitle}</h1>
-                            <p>${hymn.bibleVerse}</p>
-                            <p>${hymn.categoryName}</p>
-                            <p>${hymn.author}</p>
-                        </a>
-                        <hr>
-                    `;
-          });
+          // Display all hymns
+          if (hymns.length > 0) {
+            insertHymns(hymns)
+          } else {
+            hymnsContainer.innerHTML = `
+              <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
+            `;
+          }
+
         } catch (error) {
           console.error("Failed to fetch hymns:", error);
         } finally {
