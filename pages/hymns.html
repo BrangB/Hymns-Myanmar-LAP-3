@@ -49,8 +49,8 @@
       const prev = document.getElementById("prev");
       const next = document.getElementById("next");
 
-    //  const backendApi = "https://hymns-myanmar-vercel.onrender.com/api/hymns.php";
-    const backendApi = "http://localhost/hymnsmyanmar/backend/api/hymns.php";
+     const backendApi = "https://hymns-myanmar-vercel.onrender.com/api";
+    // const backendApi = "http://localhost/hymnsmyanmar/backend/api";
     let page = 1;
     let total_page = null;
 
@@ -74,7 +74,7 @@
 
           // Fetch the hymns based on the hymn name
           const response = await fetch(
-            `${backendApi}?page=${page}&hymnname=${hymnName}`
+            `${backendApi}/hymns.php?page=${page}&hymnname=${hymnName}`
           );
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -129,7 +129,7 @@
           window.history.pushState({}, "", url);
 
           // Fetch all hymns
-          const response = await fetch(`${backendApi}?page=${page}`);
+          const response = await fetch(`${backendApi}/hymns.php?page=${page}`);
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }

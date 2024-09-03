@@ -44,8 +44,8 @@
 
     <script>
 
-        const backendApi = "http://localhost/hymnsmyanmar/backend/api/";
-        // const backendApi = "https://hymns-myanmar-vercel.onrender.com/";
+        // const backendApi = "http://localhost/hymnsmyanmar/backend/api";
+        const backendApi = "https://hymns-myanmar-vercel.onrender.com/api";
 
         const overlayQr = document.querySelector(".overlayQr");
         const body = document.querySelector('body');
@@ -66,7 +66,6 @@
                 loadingScreen.classList.add("flex");
 
                 const response = await fetch(`${backendApi}/hymn.php?id=${hymnId}`);
-                // const response = await fetch(`${backendApi}/api/index.php?id=${hymnId}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
