@@ -7,25 +7,124 @@
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="css/output.css">
     <link rel="stylesheet" href="css/input.css">
+    <script src="https://kit.fontawesome.com/391e4d0740.js" crossorigin="anonymous"></script>
 
 </head>
-<body class="overflow-hidden">
-    <nav class="w-screen fixed text-white top-0 left-0 p-6 px-12 bg-transparent backdrop:blur-md flex items-center justify-between">
+<body class="overflow-x-hidden bg-[#075C4D]">
+    <div class="overlayNav flex items-center justify-center md:hidden overflow-hidden cursor-pointer w-screen h-screen scale-100 absolute top-0 -left-[100%] duration-500 z-30 bg-[#E2E46E]">
+        <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-xl"></i></div>
+        <ul class="flex flex-col gap-6 items-center text-sm justify-center uppercase font-light">
+            <li class="cursor-pointer hover:text-[#E2E46E]">Home</li>
+            <li class="cursor-pointer hover:text-[#E2E46E]">Feature</li>
+            <li class="cursor-pointer hover:text-[#E2E46E]">About Us</li>
+            <li class="cursor-pointer hover:text-[#E2E46E]">Contact Us</li>
+        </ul>
+    </div>
+    
+    <nav class="w-screen sticky z-40 text-white top-0 left-0 p-6 px-24 bg-[#075c4c62] backdrop-blur-xl shadow-lg flex items-center justify-between">
         <div class="logo font-extrabold text-xl text-center italic text-[#E2E46E]">Hymn Myanmar</div>
-        <div class="navbar">
-            <ul class="flex gap-6 items-center text-sm justify-center uppercase font-light font">
-                <li class="cursor-pointer">Home</li>
-                <li class="cursor-pointer">Feature</li>
-                <li class="cursor-pointer">About Us</li>
-                <li class="cursor-pointer">Contact Us</li>
+        <div class="navbar hidden md:flex">
+            <ul class="flex gap-6 items-center text-sm justify-center uppercase font-light">
+                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Home</li>
+                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Feature</li>
+                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">About Us</li>
+                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Contact Us</li>
             </ul>
         </div>
-        <a href="pages/hymns.html" class="bg-[#0D9678] p-2 px-3 flex text-center items-center justify-center rounded-md">
+        <a href="pages/hymns.html" class="bg-[#0D9678] p-2 px-3 hidden md:flex text-center items-center justify-center rounded-md">
             Explore
         </a>
+        <div class="p-3 flex md:hidden"><i class="fa-solid menuIcon fa-bars text-2xl cursor-pointer"></i></div>
     </nav>
-    <div class="mainContainer bg-[#075C4D] w-screen h-screen">
+    <section class="mainContainer w-full h-auto mt-8 flex flex-col items-center justify-center p-8 px-24">
+        <div id="hero" class="hero w-full relative bg-bottom bg-cover h-[400px] rounded-3xl overflow-hidden transition-opacity duration-500 ease-in-out" style="background-image: url('/assets/hero.jpg');">
+            <div class="blackCover text-white absolute flex items-end p-20 justify-between gap-6 top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000] to-[#00000048]">
+                <div class="desc w-2/3 flex flex-col gap-2">
+                    <h1 class="text-xl">"Sing to the Lord, all the earth; proclaim his salvation day after day."</h1>
+                    <p>1 Chronicles 16:23 (NIV)</p>
+                    <p class="text-[#7e7e7e]">May these hymns inspire your heart and bring you closer to God’s love and grace.</p>
+                </div>
+                <a href="pages/hymns.html" class="bg-[#075C4D] px-3 p-2 rounded-lg font-semibold uppercase">Open Hymns</a>
+            </div>
+        </div>    
+        <div class="bibleVerse mt-24 text-[#e6e6e6b9] w-2/3 text-xl text-center font-[300]">
+            <span class="text-3xl text-[#E2E46E]">“</span> Explore our hymn collection, each song crafted to uplift and inspire. Let the melodies draw you closer to God’s word and presence. <span class="text-3xl text-[#E2E46E]">”</span>
+        </div>  
+        <div class="text-white relative bibleVerse font-[300] w-1/2 h-[300px] mt-24 ">
+            <img src="/assets/floor.jpg" class="w-full h-full absolute top-0 z-20 left-0 object-cover">
+            <div class="text text-center relative w-full h-full bg-[#00000096] gap-6 z-30 flex flex-col items-center justify-center">
+                <h1 class="text-xl">Welcome to Hymns of Grace</h1>
+                <div class="desc text-[#ffffffcc] px-12 text-lg">Your journey into the world of timeless hymns begins here. Discover the stories, melodies, and meanings that have inspired generations.</div>
+                <button class="bg-[#E2E46E] p-2 px-3 text-[#075C4D]">Learn More</button>
+            </div>
+        </div>  
 
-    </div>
+    </section>
+
+    <section class="feature p-24">
+        <div class="header text-white w-full flex items-center justify-center flex-col">
+            <h1 class="section-title-01 text-[60px]">Features</h1>
+            <h1 class="font-[900] text-[35px] -translate-y-8">Features</h1>
+        </div>
+        <video src="/assets/testing.mp4" autoplay loop muted class="w-[500px]"></video>
+    </section>
+
+    <section class="aboutUs p-24">
+        <div class="header text-white w-full flex items-center justify-center flex-col">
+            <h1 class="section-title-01 text-[60px]">About Us</h1>
+            <h1 class="font-[900] text-[35px] -translate-y-8">About Us</h1>
+        </div>
+    </section>
+
+    <section class="contactUs p-24">
+        <div class="header text-white w-full flex items-center justify-center flex-col">
+            <h1 class="section-title-01 text-[60px]">Contact Us</h1>
+            <h1 class="font-[900] text-[35px] -translate-y-8">Contact Us</h1>
+        </div>
+    </section>
+
+    <script>
+        const overlayNav = document.querySelector(".overlayNav");
+        const menuIcon = document.querySelector(".menuIcon");
+        const closeMenu = document.querySelector(".closeMenu");
+
+        const openMenu = () => {
+            overlayNav.classList.toggle("-left-[100%]")
+            overlayNav.classList.toggle("left-0")
+        }
+
+        menuIcon.addEventListener("click", () => {
+            openMenu();
+        })
+        
+        closeMenu.addEventListener("click", () => {
+            openMenu();
+        })
+
+        const hero = document.getElementById('hero');
+        const images = [
+            '/assets/hero.jpg',
+            '/assets/hero2.jpg',
+        ];
+        let currentIndex = 0;
+
+        function changeBackground() {
+            // Fade out
+            hero.style.opacity = 0;
+
+            setTimeout(() => {
+                // Change to the next image in the array
+                currentIndex = (currentIndex + 1) % images.length;
+                hero.style.backgroundImage = `url('${images[currentIndex]}')`;
+
+                // Fade in
+                hero.style.opacity = 1;
+            }, 500); // Match this duration with the CSS transition duration
+        }
+
+        // Start the loop
+        setInterval(changeBackground, 5000); // Change every 5 seconds
+
+    </script>
 </body>
 </html>
