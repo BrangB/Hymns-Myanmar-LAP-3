@@ -108,7 +108,8 @@
                         `;
                     }
                 }
-                generateQrCode(`${backendApi}/backend/api.php?id=${hymnId}`);
+                const currentUrl = window.location.href;
+                generateQrCode(currentUrl);
 
             } catch (error) {
                 console.error("Failed to fetch hymns:", error);
