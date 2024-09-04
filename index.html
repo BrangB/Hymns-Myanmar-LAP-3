@@ -11,24 +11,17 @@
 
 </head>
 <body class="overflow-x-hidden bg-[#075C4D]">
-    <div class="overlayNav flex items-center justify-center md:hidden overflow-hidden cursor-pointer w-screen h-screen scale-100 absolute top-0 -left-[100%] duration-500 z-30 bg-[#E2E46E]">
-        <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-xl"></i></div>
-        <ul class="flex flex-col gap-6 items-center text-sm justify-center uppercase font-light">
-            <li class="cursor-pointer hover:text-[#E2E46E]">Home</li>
-            <li class="cursor-pointer hover:text-[#E2E46E]">Feature</li>
-            <li class="cursor-pointer hover:text-[#E2E46E]">About Us</li>
-            <li class="cursor-pointer hover:text-[#E2E46E]">Contact Us</li>
-        </ul>
-    </div>
+
+    <!-- <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-xl"></i></div> -->
     
-    <nav class="w-screen sticky z-40 text-white top-0 left-0 p-6 px-24 bg-[#075c4c62] backdrop-blur-xl shadow-lg flex items-center justify-between">
+    <nav class="w-screen sticky z-40 text-white top-0 left-0 p-6 px-12 lg:px-24 bg-[#075c4c62] backdrop-blur-xl shadow-lg flex items-center justify-between">
         <div class="logo font-extrabold text-xl text-center italic text-[#E2E46E]">Hymn Myanmar</div>
         <div class="navbar hidden md:flex">
             <ul class="flex gap-6 items-center text-sm justify-center uppercase font-light">
-                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Home</li>
-                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Feature</li>
-                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">About Us</li>
-                <li class="cursor-pointer hover:text-[#E2E46E] text-white duration-200">Contact Us</li>
+                <a class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#home">Home</a>
+                <a class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#feature">Feature</a>
+                <a class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#aboutUs">About Us</a>
+                <a class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#contactUs">Contact Us</a>
             </ul>
         </div>
         <a href="pages/hymns.html" class="bg-[#0D9678] p-2 px-3 hidden md:flex text-center items-center justify-center rounded-md">
@@ -36,70 +29,170 @@
         </a>
         <div class="p-3 flex md:hidden"><i class="fa-solid menuIcon fa-bars text-2xl cursor-pointer"></i></div>
     </nav>
-    <section class="mainContainer w-full h-auto mt-8 flex flex-col items-center justify-center p-8 px-24">
-        <div id="hero" class="hero w-full relative bg-bottom bg-cover h-[400px] rounded-3xl overflow-hidden transition-opacity duration-500 ease-in-out" style="background-image: url('/assets/hero.jpg');">
-            <div class="blackCover text-white absolute flex items-end p-20 justify-between gap-6 top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000] to-[#00000048]">
-                <div class="desc w-2/3 flex flex-col gap-2">
-                    <h1 class="text-xl">"Sing to the Lord, all the earth; proclaim his salvation day after day."</h1>
-                    <p>1 Chronicles 16:23 (NIV)</p>
-                    <p class="text-[#7e7e7e]">May these hymns inspire your heart and bring you closer to God’s love and grace.</p>
+    <section id="home" class="mainContainer w-full h-auto mt-8 flex flex-col items-center justify-center p-3 md:p-8 lg:px-24">
+        <div id="hero" class="hero w-full relative bg-bottom bg-cover h-[350px] md:h-[400px] rounded-3xl overflow-hidden transition-opacity duration-500 ease-in-out" style="background-image: url('/assets/hero.jpg');">
+            <div class="blackCover text-white absolute flex flex-col md:flex-row items-start md:items-end p-6 md:p-16 lg:p-20 justify-end md:justify-between gap-6 top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000] to-[#00000048]">
+                <div class="desc w-full md:w-2/3 flex flex-col gap-2">
+                    <h1 class="text-lg md:text-xl">"Sing to the Lord, all the earth; proclaim his salvation day after day."</h1>
+                    <p class="text-sm lg:text-lg">1 Chronicles 16:23 (NIV)</p>
+                    <p class="text-[#7e7e7e] text-sm md:text-md">May these hymns inspire your heart and bring you closer to God’s love and grace.</p>
                 </div>
-                <a href="pages/hymns.html" class="bg-[#075C4D] px-3 p-2 rounded-lg font-semibold uppercase">Open Hymns</a>
+                <a href="pages/hymns.html" class="bg-[#075C4D] px-3 p-2 text-sm md:text-md rounded-lg font-semibold uppercase">Open Hymns</a>
             </div>
         </div>    
-        <div class="bibleVerse mt-24 text-[#e6e6e6b9] w-2/3 text-xl text-center font-[300]">
-            <span class="text-3xl text-[#E2E46E]">“</span> Explore our hymn collection, each song crafted to uplift and inspire. Let the melodies draw you closer to God’s word and presence. <span class="text-3xl text-[#E2E46E]">”</span>
+        <div class="bibleVerse mt-16 md:mt-24 text-[#e6e6e6b9] w-full md:w-2/3 text-xl text-center font-[300]">
+            <span class="text-xl md:text-2xl lg:text-3xl text-[#E2E46E]">“</span> Explore our hymn collection, each song crafted to uplift and inspire. Let the melodies draw you closer to God’s word and presence. <span class="text-3xl text-[#E2E46E]">”</span>
         </div>  
-        <div class="text-white relative bibleVerse font-[300] w-1/2 h-[300px] mt-24 ">
+        <div class="text-white relative bibleVerse font-[300] w-full md:w-1/2 h-[300px] mt-16 md:mt-24">
             <img src="/assets/floor.jpg" class="w-full h-full absolute top-0 z-20 left-0 object-cover">
-            <div class="text text-center relative w-full h-full bg-[#00000096] gap-6 z-30 flex flex-col items-center justify-center">
-                <h1 class="text-xl">Welcome to Hymns of Grace</h1>
-                <div class="desc text-[#ffffffcc] px-12 text-lg">Your journey into the world of timeless hymns begins here. Discover the stories, melodies, and meanings that have inspired generations.</div>
+            <div class="text text-center relative w-full h-full bg-[#00000096] gap-6 z-20 flex flex-col items-center justify-center">
+                <h1 class="text-lg md:text-xl">Welcome to Hymns of Grace</h1>
+                <div class="desc text-[#ffffffcc] px-6 md:px-12 md:text-lg">Your journey into the world of timeless hymns begins here. Discover the stories, melodies, and meanings that have inspired generations.</div>
                 <button class="bg-[#E2E46E] p-2 px-3 text-[#075C4D]">Learn More</button>
             </div>
         </div>  
-
     </section>
 
-    <section class="feature p-24">
+    <section id="feature" class="feature px-2 md:p-24">
         <div class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[60px]">Features</h1>
             <h1 class="font-[900] text-[35px] -translate-y-8">Features</h1>
         </div>
-        <video src="/assets/testing.mp4" autoplay loop muted class="w-[500px]"></video>
+        <div class="features flex flex-col md:flex-row items-center justify-center gap-8">
+            <div class="searchByNameF w-full md:w-[60%] h-[400px] bg-transparent md:bg-[#e2e46ed0] rounded-sm flex items-center justify-center flex-col gap-6">
+                <div class="numberOrname w-full md:w-[80%] bg-white p-3 flex items-center justify-start gap-4 shadow-md">
+                    <div class="icon p-2 bg-[#764FA7] min-w-[40px] max-w-[40px] h-[40px] md:min-w-[50px] md:max-w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
+                        <i class="fa-solid text-lg fa-magnifying-glass text-white"></i>
+                    </div>
+                    <div class="text">
+                        <h1 class="font-semibold md:text-lg">Search with Name or Number</h1>
+                        <p class="font-light text-[#3b3b3b] text-sm md:text-md">"Easily find hymns by searching with their number or name."</p>
+                    </div>
+                </div>
+                <div class="responsive w-full md:w-[80%] bg-white p-3 flex items-center justify-start gap-4 shadow-md">
+                    <div class="icon p-2 bg-[#764FA7] min-w-[40px] max-w-[40px] h-[40px] md:min-w-[50px] md:max-w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
+                        <i class="fa-solid text-lg fa-mobile-screen text-white"></i>
+                    </div>
+                    <div class="text">
+                        <h1 class="font-semibold md:text-lg">Responsive Design</h1>
+                        <p class="font-light text-[#3b3b3b] text-sm md:text-md">"Enjoy a seamless experience across all devices with our fully responsive design."</p>
+                    </div>
+                </div>
+                <div class="email w-full md:w-[80%] bg-white p-3 flex items-center justify-start gap-4 shadow-md">
+                    <div class="icon p-2 bg-[#764FA7] min-w-[40px] max-w-[40px] h-[40px] md:min-w-[50px] md:max-w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
+                        <i class="fa-regular text-lg fa-envelope text-white"></i>
+                    </div>
+                    <div class="text">
+                        <h1 class="font-semibold md:text-lg">Email Feedback</h1>
+                        <p class="font-light text-[#3b3b3b] text-sm md:text-md">"Share your thoughts and suggestions directly via email. We value your feedback!"</p>
+                    </div>
+                </div>
+            </div>
+            <div class=" w-full md:w-[30%] h-[400px] rounded-sm overflow-hidden">
+                <video src="/assets/testing.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+            </div>
+        </div>
     </section>
 
-    <section class="aboutUs p-24">
+    <section id="aboutUs" class="aboutUs px-2 mt-16 md:mt-4 md:p-24">
         <div class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[60px]">About Us</h1>
             <h1 class="font-[900] text-[35px] -translate-y-8">About Us</h1>
         </div>
+        <div class="content mt-8 flex flex-col md:flex-row items-center justify-center gap-8 p-2 md:p-8">
+            <div class="gpPhoto w-full md:w-[40%]">
+                <img src="assets/gpphoto.png" alt="group photo" class=" w-full md:w-[90%]">
+            </div>
+            <div class="text w-full md:w-[60%] text-white flex flex-col gap-4">
+                <div class="gpName text-2xl font-bold">Syntax (Group -3)</div>
+                <div class="desc text-[#ffffffb2] text-lg tracking-wide font-light text-justify">
+                    We are a dedicated team of students from the MIT LAP Program, currently in our third year as Computer Science majors. Together, we are developing the Hymn Myanmar project, a passion-driven initiative to bring timeless hymns to the digital age. Our mission is to create a seamless and accessible platform for everyone to explore, enjoy, and be inspired by these sacred melodies.
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="contactUs p-24">
+    <section id="groupMember" class="groupMember p-2 mt-6 md:mt-2 md:p-12">
         <div class="header text-white w-full flex items-center justify-center flex-col">
-            <h1 class="section-title-01 text-[60px]">Contact Us</h1>
-            <h1 class="font-[900] text-[35px] -translate-y-8">Contact Us</h1>
+            <h1 class="section-title-01 text-[40px] md:text-[60px]">Group Members</h1>
+            <h1 class="font-[900] text-[25px] md:text-[35px] -translate-y-6 md:-translate-y-8">Group Members</h1>
+        </div>
+        <div class="member flex flex-wrap items-center justify-center gap-12 md:gap-24 p-2 md:p-8">
+            <div class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+                    <img src="assets/member/brang.jpg" alt="Brang" class="object-cover">
+                </div>
+                <h1 class="name font-bold text-xl mt-3">Brang Tsawm Aung</h1>
+                <p class="font-light text-lg">Developer</p>
+                <div class="socialIcon flex gap-4">
+                    <i class="fa-brands fa-facebook text-2xl text-[#2079ff] cursor-pointer"></i>
+                    <i class="fa-brands fa-instagram text-2xl text-[#ffa90a] cursor-pointer"></i>
+                </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+                    <img src="assets/member/bamawchain.jpg" alt="BaMawChain" class="w-full h-full object-cover">
+                </div>
+                <h1 class="name font-bold text-xl mt-3">Ba Maw Chain</h1>
+                <p class="font-light text-lg">Data Collector</p>
+                <div class="socialIcon flex gap-4">
+                    <i class="fa-brands fa-facebook text-2xl text-[#2079ff] cursor-pointer"></i>
+                    <i class="fa-brands fa-instagram text-2xl text-[#ffa90a] cursor-pointer"></i>
+                </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+                    <img src="assets/member/cc.jpg" alt="cc" class="object-cover">
+                </div>
+                <h1 class="name font-bold text-xl mt-3">C. Wisdom Min</h1>
+                <p class="font-light text-lg">UI/UX Designer</p>
+                <div class="socialIcon flex gap-4">
+                    <i class="fa-brands fa-facebook text-2xl text-[#2079ff] cursor-pointer"></i>
+                    <i class="fa-brands fa-instagram text-2xl text-[#ffa90a] cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contactUs" class="contactUs p-2 mt-6 md:mt-2 md:p-12 md:py-24">
+        <div class="header text-white w-full flex items-center justify-center flex-col">
+            <h1 class="section-title-01 text-[40px] md:text-[60px]">Contact Us</h1>
+            <h1 class="font-[900] text-[25px] md:text-[35px] -translate-y-6 md:-translate-y-8">Contact Us</h1>
+        </div>
+        <div class="env flex flex-col md:flex-row items-end justify-center mt-8 md:mt-12 gap-8 ">
+            <div class="info w-full md:w-[40%] -translate-y-16 mt-12 md:mt-0">
+                <div class="box w-full h-[300px] bg-white"></div>
+            </div>
+            <div class="bgImg w-full md:w-[600px] relative">
+                <img src="assets/EnvImg.png" alt="Env img" class="w-full">
+                <div class="bg-[#fff] shadow-2xl w-[85%] md:w-[80%] h-auto absolute bottom-[45px] md:bottom-[50px] left-0 right-0 mx-auto p-4 py-4 md:py-8">
+                    <div class="mailAndName flex items-center justify-between gap-6">
+                        <div class="name">
+                            <h1 class="nametitle">Name</h1>
+                            <input type="text" class="nameinput outline-none border-b py-1 border-[#000000] w-full">
+                        </div>
+                        <div class="email">
+                            <h1>Email</h1>
+                            <input type="email" class="outline-none border-b py-1 border-[#000000] w-full">
+                        </div>
+                    </div>
+                    <div class="message mt-6">
+                        <h1 id="messageText">Message</h1>
+                        <textarea id="messaegBox" class="outline-none border-b py-1 border-[#000000] w-full h-[100px]"></textarea>
+                    </div>
+                
+                    <div class="button mt-6 flex justify-start ">
+                        <button class="bg-[#0D9678] text-white py-2 px-6 hover:bg-[#0d9678dc] transition">
+                            <i class="fa-regular fa-paper-plane text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
 
     <script>
-        const overlayNav = document.querySelector(".overlayNav");
-        const menuIcon = document.querySelector(".menuIcon");
-        const closeMenu = document.querySelector(".closeMenu");
-
-        const openMenu = () => {
-            overlayNav.classList.toggle("-left-[100%]")
-            overlayNav.classList.toggle("left-0")
-        }
-
-        menuIcon.addEventListener("click", () => {
-            openMenu();
-        })
-        
-        closeMenu.addEventListener("click", () => {
-            openMenu();
-        })
 
         const hero = document.getElementById('hero');
         const images = [
