@@ -7,14 +7,34 @@
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="css/output.css">
     <link rel="stylesheet" href="css/input.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/391e4d0740.js" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+        emailjs.init({
+            publicKey: "EHtHimYvpf-Acal1b",
+        });
+        })();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 </head>
 <body class="overflow-x-hidden bg-[#075C4D]">
 
-    <!-- <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-xl"></i></div> -->
+    <div class="overlay md:hidden flex items-center justify-center fixed w-screen h-screen z-50 bg-[#075c4c85] backdrop-blur-lg top-0 -left-[120%] duration-500">
+        <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-2xl text-white cursor-pointer"></i></div>
+        <ul class="flex flex-col gap-6 items-center text-lg justify-center uppercase font-light">
+            <a onclick="openMenuFnc()" class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#home">Home</a>
+            <a onclick="openMenuFnc()" class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#feature">Feature</a>
+            <a onclick="openMenuFnc()" class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#aboutUs">About Us</a>
+            <a onclick="openMenuFnc()" class="cursor-pointer hover:text-[#E2E46E] text-white duration-200" href="#contactUs">Contact Us</a>
+        </ul>
+    </div>
     
-    <nav class="w-screen sticky z-40 text-white top-0 left-0 p-6 px-12 lg:px-24 bg-[#075c4c62] backdrop-blur-xl shadow-lg flex items-center justify-between">
+    <nav class="w-screen sticky z-40 text-white top-0 left-0 p-6 px-8 md:px-12 lg:px-24 bg-[#075c4c62] backdrop-blur-xl shadow-lg flex items-center justify-between">
         <div class="logo font-extrabold text-xl text-center italic text-[#E2E46E]">Hymn Myanmar</div>
         <div class="navbar hidden md:flex">
             <ul class="flex gap-6 items-center text-sm justify-center uppercase font-light">
@@ -29,7 +49,7 @@
         </a>
         <div class="p-3 flex md:hidden"><i class="fa-solid menuIcon fa-bars text-2xl cursor-pointer"></i></div>
     </nav>
-    <section id="home" class="mainContainer w-full h-auto mt-8 flex flex-col items-center justify-center p-3 md:p-8 lg:px-24">
+    <section id="home" class="mainContainer w-full h-auto flex flex-col items-center justify-center p-3 md:p-8 lg:px-24">
         <div id="hero" class="hero w-full relative bg-bottom bg-cover h-[350px] md:h-[400px] rounded-3xl overflow-hidden transition-opacity duration-500 ease-in-out" style="background-image: url('/assets/hero.jpg');">
             <div class="blackCover text-white absolute flex flex-col md:flex-row items-start md:items-end p-6 md:p-16 lg:p-20 justify-end md:justify-between gap-6 top-0 left-0 w-full h-full bg-gradient-to-t from-[#000000] to-[#00000048]">
                 <div class="desc w-full md:w-2/3 flex flex-col gap-2">
@@ -40,10 +60,10 @@
                 <a href="pages/hymns.html" class="bg-[#075C4D] px-3 p-2 text-sm md:text-md rounded-lg font-semibold uppercase">Open Hymns</a>
             </div>
         </div>    
-        <div class="bibleVerse mt-16 md:mt-24 text-[#e6e6e6b9] w-full md:w-2/3 text-xl text-center font-[300]">
+        <div data-aos="fade-up" class="bibleVerse mt-16 md:mt-24 text-[#e6e6e6b9] w-full md:w-2/3 text-xl text-center font-[300]">
             <span class="text-xl md:text-2xl lg:text-3xl text-[#E2E46E]">“</span> Explore our hymn collection, each song crafted to uplift and inspire. Let the melodies draw you closer to God’s word and presence. <span class="text-3xl text-[#E2E46E]">”</span>
         </div>  
-        <div class="text-white relative bibleVerse font-[300] w-full md:w-1/2 h-[300px] mt-16 md:mt-24">
+        <div data-aos="fade-up" class="text-white relative bibleVerse font-[300] w-full md:w-1/2 h-[300px] mt-16 md:mt-24">
             <img src="/assets/floor.jpg" class="w-full h-full absolute top-0 z-20 left-0 object-cover">
             <div class="text text-center relative w-full h-full bg-[#00000096] gap-6 z-20 flex flex-col items-center justify-center">
                 <h1 class="text-lg md:text-xl">Welcome to Hymns of Grace</h1>
@@ -53,13 +73,13 @@
         </div>  
     </section>
 
-    <section id="feature" class="feature px-2 md:p-24">
-        <div class="header text-white w-full flex items-center justify-center flex-col">
+    <section id="feature" data-aos-delay="500" class="feature px-2 mt-12 md:mt-8 md:p-24">
+        <div data-aos="fade-up" class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[60px]">Features</h1>
             <h1 class="font-[900] text-[35px] -translate-y-8">Features</h1>
         </div>
-        <div class="features flex flex-col md:flex-row items-center justify-center gap-8">
-            <div class="searchByNameF w-full md:w-[60%] h-[400px] bg-transparent md:bg-[#e2e46ed0] rounded-sm flex items-center justify-center flex-col gap-6">
+        <div class="features mt-8 flex flex-col md:flex-row items-center justify-center gap-8">
+            <div data-aos="fade-up-right" data-aos-delay="200" data-aos-duration="1000" class="searchByNameF w-full md:w-[60%] h-[400px] bg-transparent md:bg-[#e2e46ed0] rounded-sm flex items-center justify-center flex-col gap-6">
                 <div class="numberOrname w-full md:w-[80%] bg-white p-3 flex items-center justify-start gap-4 shadow-md">
                     <div class="icon p-2 bg-[#764FA7] min-w-[40px] max-w-[40px] h-[40px] md:min-w-[50px] md:max-w-[50px] md:h-[50px] rounded-full flex items-center justify-center">
                         <i class="fa-solid text-lg fa-magnifying-glass text-white"></i>
@@ -88,22 +108,22 @@
                     </div>
                 </div>
             </div>
-            <div class=" w-full md:w-[30%] h-[400px] rounded-sm overflow-hidden">
+            <div data-aos="fade-up-left" data-aos-delay="200" data-aos-duration="1000" class=" w-full md:w-[30%] h-[400px] rounded-sm overflow-hidden">
                 <video src="/assets/testing.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
             </div>
         </div>
     </section>
 
     <section id="aboutUs" class="aboutUs px-2 mt-16 md:mt-4 md:p-24">
-        <div class="header text-white w-full flex items-center justify-center flex-col">
+        <div data-aos="fade-up" data-aos-duration="1000" class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[60px]">About Us</h1>
             <h1 class="font-[900] text-[35px] -translate-y-8">About Us</h1>
         </div>
         <div class="content mt-8 flex flex-col md:flex-row items-center justify-center gap-8 p-2 md:p-8">
-            <div class="gpPhoto w-full md:w-[40%]">
+            <div data-aos="fade-up-right" class="gpPhoto w-full md:w-[40%]">
                 <img src="assets/gpphoto.png" alt="group photo" class=" w-full md:w-[90%]">
             </div>
-            <div class="text w-full md:w-[60%] text-white flex flex-col gap-4">
+            <div data-aos="fade-up-left"data-aos-duration="1000" class="text w-full md:w-[60%] text-white flex flex-col gap-4">
                 <div class="gpName text-2xl font-bold">Syntax (Group -3)</div>
                 <div class="desc text-[#ffffffb2] text-lg tracking-wide font-light text-justify">
                     We are a dedicated team of students from the MIT LAP Program, currently in our third year as Computer Science majors. Together, we are developing the Hymn Myanmar project, a passion-driven initiative to bring timeless hymns to the digital age. Our mission is to create a seamless and accessible platform for everyone to explore, enjoy, and be inspired by these sacred melodies.
@@ -112,14 +132,14 @@
         </div>
     </section>
 
-    <section id="groupMember" class="groupMember p-2 mt-6 md:mt-2 md:p-12">
-        <div class="header text-white w-full flex items-center justify-center flex-col">
+    <section id="groupMember" class="groupMember p-2 mt-6 md:mt-2 md:p-24">
+        <div data-aos="fade-up" class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[40px] md:text-[60px]">Group Members</h1>
             <h1 class="font-[900] text-[25px] md:text-[35px] -translate-y-6 md:-translate-y-8">Group Members</h1>
         </div>
         <div class="member flex flex-wrap items-center justify-center gap-12 md:gap-24 p-2 md:p-8">
-            <div class="flex flex-col items-center justify-center gap-3 text-white">
-                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+            <div data-aos="fade-up-right" data-aos-duration="1000" class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full overflow-hidden">
                     <img src="assets/member/brang.jpg" alt="Brang" class="object-cover">
                 </div>
                 <h1 class="name font-bold text-xl mt-3">Brang Tsawm Aung</h1>
@@ -129,8 +149,8 @@
                     <i class="fa-brands fa-instagram text-2xl text-[#ffa90a] cursor-pointer"></i>
                 </div>
             </div>
-            <div class="flex flex-col items-center justify-center gap-3 text-white">
-                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+            <div data-aos="fade-up" data-aos-duration="1000" class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full overflow-hidden">
                     <img src="assets/member/bamawchain.jpg" alt="BaMawChain" class="w-full h-full object-cover">
                 </div>
                 <h1 class="name font-bold text-xl mt-3">Ba Maw Chain</h1>
@@ -140,8 +160,8 @@
                     <i class="fa-brands fa-instagram text-2xl text-[#ffa90a] cursor-pointer"></i>
                 </div>
             </div>
-            <div class="flex flex-col items-center justify-center gap-3 text-white">
-                <div class="img w-[140px] h-[140px] rounded-full overflow-hidden">
+            <div data-aos="fade-up-left" data-aos-duration="1000" class="flex flex-col items-center justify-center gap-3 text-white">
+                <div class="img w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full overflow-hidden">
                     <img src="assets/member/cc.jpg" alt="cc" class="object-cover">
                 </div>
                 <h1 class="name font-bold text-xl mt-3">C. Wisdom Min</h1>
@@ -155,11 +175,11 @@
     </section>
 
     <section id="contactUs" class="contactUs p-2 mt-6 md:mt-2 md:p-12 md:py-24">
-        <div class="header text-white w-full flex items-center justify-center flex-col">
+        <div data-aos="fade-up" class="header text-white w-full flex items-center justify-center flex-col">
             <h1 class="section-title-01 text-[40px] md:text-[60px]">Contact Us</h1>
             <h1 class="font-[900] text-[25px] md:text-[35px] -translate-y-6 md:-translate-y-8">Contact Us</h1>
         </div>
-        <div class="env flex flex-col md:flex-row items-end justify-center mt-8 md:mt-12 gap-8 ">
+        <div data-aos="fade-up" data-aos-duration="1000" class="env flex flex-col md:flex-row items-end justify-center mt-8 md:mt-12 gap-8 ">
             <div class="info w-full md:w-[40%] -translate-y-16 mt-12 md:mt-0">
                 <div class="box w-full h-[300px] bg-white"></div>
             </div>
@@ -169,20 +189,20 @@
                     <div class="mailAndName flex items-center justify-between gap-6">
                         <div class="name">
                             <h1 class="nametitle">Name</h1>
-                            <input type="text" class="nameinput outline-none border-b py-1 border-[#000000] w-full">
+                            <input type="text" id="name" class="nameinput outline-none border-b py-1 border-[#000000] w-full">
                         </div>
                         <div class="email">
                             <h1>Email</h1>
-                            <input type="email" class="outline-none border-b py-1 border-[#000000] w-full">
+                            <input type="email" id="email" class="outline-none border-b py-1 border-[#000000] w-full">
                         </div>
                     </div>
                     <div class="message mt-6">
                         <h1 id="messageText">Message</h1>
-                        <textarea id="messaegBox" class="outline-none border-b py-1 border-[#000000] w-full h-[100px]"></textarea>
+                        <textarea id="messageBox" class="outline-none border-b py-1 border-[#000000] w-full h-[100px]"></textarea>
                     </div>
                 
                     <div class="button mt-6 flex justify-start ">
-                        <button class="bg-[#0D9678] text-white py-2 px-6 hover:bg-[#0d9678dc] transition">
+                        <button onclick="sendEmail()" class="bg-[#0D9678] text-white py-2 px-6 hover:bg-[#0d9678dc] transition">
                             <i class="fa-regular fa-paper-plane text-lg"></i>
                         </button>
                     </div>
@@ -191,6 +211,28 @@
             </div>
         </div>
     </section>
+
+    <footer class="p-12 flex flex-col items-center bg-[#11473d]">
+        <div class="logo font-extrabold text-2xl text-center italic text-[#E2E46E] mb-4">Hymn Myanmar</div>
+        
+        <nav class="mb-4">
+            <ul class="flex space-x-6">
+                <li><a href="#feature" class="text-gray-500 hover:text-[#E2E46E]">Features</a></li>
+                <li><a href="#aboutUs" class="text-gray-500 hover:text-[#E2E46E]">About Us</a></li>
+                <li><a href="#contactUs" class="text-gray-500 hover:text-[#E2E46E]">Contact Us</a></li>
+                <li><a href="#groupMember" class="text-gray-500 hover:text-[#E2E46E]">Team Member</a></li>
+            </ul>
+        </nav>
+        
+        <div class="text-sm text-gray-400 mb-4">
+            © 2024 Hymn Myanmar. All rights reserved.
+        </div>
+        
+        <div class="text-sm text-gray-400">
+            <a href="mailto:info@hymnmyanmar.com" class="hover:text-[#E2E46E]">Report an issue: syntaxtlap3@gmail.com</a>
+        </div>
+    </footer>
+    
 
     <script>
 
@@ -215,9 +257,55 @@
             }, 500); // Match this duration with the CSS transition duration
         }
 
+        const overlay = document.querySelector(".overlay");
+        const menuIcon = document.querySelector(".menuIcon");
+        const closeMenu = document.querySelector('.closeMenu');
+        const body = document.querySelector("body");
+
+        const openMenuFnc = () => {
+            overlay.classList.toggle("-left-[120%]");
+            overlay.classList.toggle("left-0");
+            body.classList.toggle("overflow-x-hidden");
+            body.classList.toggle("overflow-hidden");
+        }
+
+        menuIcon.addEventListener("click", () => {
+            openMenuFnc();
+        })
+
+        closeMenu.addEventListener("click", () => {
+            openMenuFnc();
+        })
+
         // Start the loop
         setInterval(changeBackground, 5000); // Change every 5 seconds
 
+        //send Email
+        const sendEmail = () => {
+            
+            const name = document.querySelector("#name");
+            const email = document.querySelector("#email");
+            const message = document.querySelector('#messageBox');
+            let params = {
+                name: name.value,
+                email: email.value,
+                message: message.value,
+                subject: "Give suggestions"
+            };
+
+            emailjs.send("service_o80qf4l", "template_g3g6wed", params)
+                .then(() => {
+                    alert("Email Sent!!!");
+                    name.value = "",
+                    email.value = "",
+                    message.value = ""
+                })
+                .catch((error) => {
+                    console.error("EmailJS Error:", error);
+                    alert("Failed to send email. Please try again.");
+                });
+        };
+        AOS.init();
     </script>
 </body>
 </html>
