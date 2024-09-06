@@ -63,9 +63,9 @@
         // Function to fetch hymn details based on hymnId
         const fetchHymns = async (hymnId) => {
             try {
-            
                 const loadingScreen = document.getElementById("loadingScreen");
                 const mainContainer = document.querySelector(".mainContainer");
+                const hymnBody = document.querySelector(".hymnBody");
 
                 loadingScreen.classList.remove("hidden");
                 loadingScreen.classList.add("flex");
@@ -74,12 +74,18 @@
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
+
                 const hymns = await response.json();
+
+                if (!hymns.hymn) {
+                    // If no hymn found, display "Invalid Hymn"
+                    mainContainer.innerHTML = `<div class="text-red-500 font-bold text-xl p-24 text-center">Invalid Hymn</div>`;
+                    return;
+                }
+
                 document.title = hymns.hymn.burmeseTitle || "Hymns";
                 console.log(hymns);
 
-                const hymnBody = document.querySelector(".hymnBody");
-                const hymnHeader = document.querySelector(".hymnHeader");
                 const burmeseTitle = document.querySelector(".burmeseTitle");
                 const bibleVerse = document.querySelector(".bibleVerse");
                 const englishTitle = document.querySelector(".englishTitle");
@@ -93,7 +99,6 @@
                 category.textContent = hymns.hymn.categoryName;
                 hymnNumber.textContent = hymns.hymn.hymnNumber;
                 author.textContent = hymns.hymn.author;
-            
 
                 const maxLength = Math.max(hymns.verses.length, hymns.choruses.length);
 
@@ -113,15 +118,18 @@
                         `;
                     }
                 }
+
                 const currentUrl = window.location.href;
                 generateQrCode(currentUrl);
 
             } catch (error) {
                 console.error("Failed to fetch hymns:", error);
+                mainContainer.innerHTML = `<div class="text-red-500 text-center">Error loading hymn.</div>`;
             } finally {
                 loadingScreen.classList.add("hidden");
             }
         };
+
 
         // Function to generate and display QR code
         const generateQrCode = (data) => {
