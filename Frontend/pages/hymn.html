@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/favicon.png">
+    <link rel="stylesheet" href="../css/output.css">
+    <link rel="stylesheet" href="../css/input.css">
+    <script src="https://kit.fontawesome.com/391e4d0740.js" crossorigin="anonymous"></script>
+    <title>Hymns Myanmar</title>
+</head>
+<body class="bg-[#075C4D] overflow-x-hidden">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="absolute z-40 top-0 left-0 hidden w-screen h-screen items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic">
+        <p class="animate-pulse">Hymn Myanmar</p>
+    </div>
+
+    <div onclick="location.href='hymns.html'" class="goback fixed z-20 w-[40px] h-[40px] rounded-full animate-bounce top-24 cursor-pointer left-5  flex items-center justify-center bg-[#E2E46E] ">
+        <i class="fa-solid fa-arrow-left text-[#0b2521] text-lg"></i>
+    </div>
+
+    <div class="overlayQr cursor-pointer pointer-events-none opacity-0 duration-300 w-screen h-screen backdrop-blur-md fixed top-0 left-0 flex items-center justify-center">
+        <div class="w-[300px] h-[300px] bg-white flex flex-col items-center justify-center gap-4">
+            <div class="header text-[#075C4D] font-extrabold italic logo text-xl">Hymns Myanmar</div>
+            <div class="largeQr w-[150px] flex flex-col gap-2"></div>
+        </div>
+    </div>
+
+    <div class="mainContainer p-12 px-8 md:px-20 flex flex-col text-white gap-12 items-center justify-center w-screen">
+        <div class="header w-full flex items-center justify-between">
+            <div class="category text-lg myanmarfont"></div>
+            <div class="hymnNumber text-xl myanmarfont"></div>
+        </div>
+        <div class="hymn w-full flex items-center justify-center flex-col gap-16">
+            <div class="hymnHeader flex flex-col items-center justify-center gap-4">
+                <div class="burmeseTitle font-semibold text-2xl text-center myanmarfont"></div>
+                <div class="englishTitle text-lg font-light text-center"></div>
+                <div class="bibleVerse text-lg text-center"></div>
+            </div>
+            <div class="hymnBody px-2 md:px-16 w-full mt-2 flex-wrap flex items-center justify-center gap-8 md:gap-16 list-decimal">
+            </div>
+        </div>
+        <div class="footer w-full flex  items-center justify-between mt-10">
+            <div class="qrCode w-[80px] md:w-[100px] h-full flex flex-col items-center justify-center gap-2 text-[#071b17]">
+            </div>
+            <div class="author text-lg md:text-xl font-extralight"></div>
+        </div>
+    </div>
+
+    <script>
+
+        // const backendApi = "http://localhost/hymnsmyanmar/backend/api";
+        const backendApi = "https://hymns-myanmar-vercel.onrender.com/api";
+
+        const overlayQr = document.querySelector(".overlayQr");
+        const body = document.querySelector('body');
+
+        const getQueryParam = (param) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        };
+
+        // Function to fetch hymn details based on hymnId
+        const fetchHymns = async (hymnId) => {
+            const mainContainer = document.querySelector(".mainContainer");
+            const loadingScreen = document.getElementById("loadingScreen");
+            const hymnBody = document.querySelector(".hymnBody");
+            try {
+
+                loadingScreen.classList.remove("hidden");
+                loadingScreen.classList.add("flex");
+
+                const response = await fetch(`${backendApi}/hymn.php?id=${hymnId}`);
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                const hymns = await response.json();
+
+                if (!hymns.hymn) {
+                    // If no hymn found, display "Invalid Hymn"
+                    mainContainer.innerHTML = `<div class="text-red-500 font-bold text-xl p-24 text-center">Invalid Hymn</div>`;
+                    return;
+                }
+
+                document.title = hymns.hymn.burmeseTitle || "Hymns";
+                console.log(hymns);
+
+                const burmeseTitle = document.querySelector(".burmeseTitle");
+                const bibleVerse = document.querySelector(".bibleVerse");
+                const englishTitle = document.querySelector(".englishTitle");
+                const category = document.querySelector(".category");
+                const hymnNumber = document.querySelector(".hymnNumber");
+                const author = document.querySelector(".author");
+
+                burmeseTitle.textContent = hymns.hymn.burmeseTitle;
+                englishTitle.textContent = `(${hymns.hymn.englishTitle})`;
+                bibleVerse.textContent = hymns.hymn.bibleVerse;
+                category.textContent = hymns.hymn.categoryName;
+                hymnNumber.textContent = hymns.hymn.hymnNumber;
+                author.textContent = hymns.hymn.author;
+
+                const maxLength = Math.max(hymns.verses.length, hymns.choruses.length);
+
+                for (let i = 0; i < maxLength; i++) {
+                    if (i < hymns.verses.length) {
+                        hymnBody.innerHTML += ` 
+                            <li class="text-xl text-left myanmarfont">
+                                ${hymns.verses[i].text}
+                            </li>
+                        `;
+                    }
+                    if (hymns.choruses !== "N/A" && i < hymns.choruses.length) {
+                        hymnBody.innerHTML += ` 
+                            <li class="chorus">
+                                ${hymns.choruses[i].text}
+                            </li>
+                        `;
+                    }
+                }
+
+                const currentUrl = window.location.href;
+                generateQrCode(currentUrl);
+
+            } catch (error) {
+                console.error("Failed to fetch hymns:", error);
+                mainContainer.innerHTML = `<div class="text-red-500 text-center">Error loading hymn.</div>`;
+            } finally {
+                loadingScreen.classList.add("hidden");
+            }
+        };
+
+
+        // Function to generate and display QR code
+        const generateQrCode = (data) => {
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(data)}`;
+            const qrCodeElement = document.querySelector(".qrCode");
+            const largeQr = document.querySelector(".largeQr");
+
+            qrCodeElement.innerHTML += `
+                <img src="${qrCodeUrl}" alt="QR Code" class="w-full object-cover" />
+                <button class="scanBtn w-full bg-[#E2E46E] uppercase font-bold text-sm p-1">Scan</button>
+            `;
+
+            largeQr.innerHTML = ` 
+                <img src="${qrCodeUrl}" alt="QR Code" class="w-full object-cover" />
+            `
+
+            const scanBtn = document.querySelector(".scanBtn");
+            const expandQr = () => {
+                console.log("Qr")
+                overlayQr.classList.toggle("pointer-events-none")
+                overlayQr.classList.toggle("opacity-0")
+                overlayQr.classList.toggle("opacity-100")
+                body.classList.toggle("overflow-x-hidden")
+                body.classList.toggle("overflow-hidden")
+            }
+
+            scanBtn.addEventListener("click", () => {
+                expandQr();
+            })
+            overlayQr.addEventListener("click", () => {
+                expandQr();
+            })
+        };
+
+        // Get the hymn ID from the URL and fetch the hymn details
+        const hymnId = getQueryParam('id');
+        if (hymnId) {
+            fetchHymns(hymnId);
+        } else {
+            console.error("Hymn ID not found in the URL.");
+        }
+    </script>
+    
+</body>
+</html>

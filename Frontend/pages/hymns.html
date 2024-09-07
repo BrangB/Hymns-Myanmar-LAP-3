@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hymns</title>
+    <link rel="icon" href="../assets/favicon.png" />
+    <link rel="stylesheet" href="../css/output.css" />
+    <link rel="stylesheet" href="../css/input.css" />
+    <script
+      src="https://kit.fontawesome.com/391e4d0740.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-[#075C4D] overflow-x-hidden">
+    <div
+      id="loadingScreen"
+      class="fixed top-0 left-0 w-screen h-screen z-50 items-center justify-center bg-[#075C4D] text-[#E2E46E] logo font-bold text-2xl italic"
+    >
+      <p class="animate-pulse">Hymn Myanmar</p>
+    </div>
+    <div
+      onclick="location.href='/'"
+      class="goback fixed z-20 w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full animate-bounce top-24 cursor-pointer left-5 flex items-center justify-center bg-[#E2E46E]"
+    >
+      <i class="fa-solid fa-arrow-left text-[#0f332e] text-lg md:text-xl"></i>
+    </div>
+    <div
+      class="mainContainer text-white w-screen flex flex-col items-center justify-center"
+    >
+      <div
+        class="px-3 mt-4 md:px-12 lg:px-24 w-full flex gap-4 md:gap-8 items-center"
+      >
+        <div
+          class="input w-[85%] md:w-[90%] flex items-center justify-center relative"
+        >
+          <input
+            id="hymnInput"
+            type="text"
+            placeholder="Hymns Name"
+            class="p-2 bg-transparent w-full outline-none border border-[#e2e46ea8] rounded-3xl px-12 md:px-16"
+          />
+          <i
+            class="fa-solid fa-magnifying-glass text-white absolute top-3 left-5 md:left-7"
+          ></i>
+        </div>
+        <i class="fa-solid gear fa-gear text-xl cursor-pointer md:text-2xl"></i>
+      </div>
+
+      <div class="hymns px-3 md:px-12 lg:px-24 py-12 flex flex-col gap-4"></div>
+      <div class="flex my-6">
+        <!-- Previous Button -->
+        <div
+          id="prev"
+          class="flex cursor-pointer items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          <svg
+            class="w-3.5 h-3.5 me-2 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 5H1m0 0 4 4M1 5l4-4"
+            />
+          </svg>
+          Previous
+        </div>
+        <div
+          id="next"
+          class="flex cursor-pointer items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          Next
+          <svg
+            class="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      class="numberModal cursor-pointer pointer-events-none z-40 opacity-0 duration-300 w-screen h-screen backdrop-blur-md fixed top-0 left-0 flex items-center justify-center"
+    >
+    <div class="closeMenu absolute z-50 top-6 right-7"><i class="fa-solid fa-xmark text-2xl text-white cursor-pointer"></i></div>
+    <div
+      class="w-atuo h-auto p-8 px-10 bg-white flex flex-col items-center justify-center gap-4"
+    >
+      <div class="header text-[#248170] font-extrabold italic logo text-xl">
+        Hymns Myanmar
+      </div>
+      <!-- Input bar for hymn ID -->
+      <input
+        id="hymnIdInput"
+        type="text"
+        placeholder="Enter Hymn ID"
+        class="w-[90%] h-[40px] text-center border border-gray-300 rounded"
+        readonly
+      />
+    
+      <!-- Number pad to input ID -->
+      <div class="numberPad w-[200px] grid grid-cols-3 gap-2 mt-2">
+        <!-- Number pad buttons -->
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(1)">1</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(2)">2</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(3)">3</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(4)">4</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(5)">5</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(6)">6</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(7)">7</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(8)">8</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(9)">9</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="clearNumber()">C</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="enterNumber(0)">0</button>
+        <button class="number-btn bg-gray-200 rounded p-2" onclick="searchHymn()">Go</button>
+      </div>
+    </div>  
+    </div>
+
+    <script>
+      const hymnsContainer = document.querySelector(".hymns");
+      const hymnInput = document.getElementById("hymnInput");
+      const loadingScreen = document.getElementById("loadingScreen");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      const gear = document.querySelector(".gear");
+      const body = document.querySelector("body");
+      const numberModal = document.querySelector(".numberModal");
+      const closeMenu = document.querySelector(".closeMenu");
+
+
+      const backendApi = "https://hymns-myanmar-vercel.onrender.com/api";
+      // const backendApi = "http://localhost/hymnsmyanmar/backend/api";
+      let page = 1;
+      let total_page = null;
+
+      const insertHymns = (hymns) => {
+        hymnsContainer.innerHTML += `
+              <table class="w-full text-left table-fixed">
+                <thead>
+                  <tr>
+                    <th class="w-[18%] md:p-2 md:w-[10%] py-2 text-sm md:text-lg">Number</th>
+                    <th class="w-[37%] md:p-2 md:w-[20%] py-2 text-sm md:text-lg">Burmese Title</th>
+                    <th class="w-[30%] md:p-2 md:w-[25%] py-2 text-sm md:text-lg">English Title</th>
+                    <th class="w-[15%] md:p-2 py-2 hidden md:table-cell text-sm md:text-lg">Bible Verse</th>
+                    <th class="w-[20%] md:p-2 md:w-[10%] py-2 text-sm md:text-lg">Category</th>
+                    <th class="w-[20%] md:p-2 py-2 hidden md:table-cell text-sm md:text-lg">Author</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${hymns
+                    .map(
+                      (hymn) => `
+                    <tr class="hymn cursor-pointer hover:bg-[#e2e46e9f] duration-300" onclick="location.href='hymn.html?id=${hymn.hymn_id}'">
+                      <td class="p-2 py-4 text-md md:text-lg">${hymn.hymnNumber}</td>
+                      <td class="p-2 py-4 text-md md:text-lg myanmarfont">${hymn.burmeseTitle}</td>
+                      <td class="p-2 text-sm md:text-[15px] py-4">${hymn.englishTitle}</td>
+                      <td class="p-2 py-4 hidden md:block">${hymn.bibleVerse}</td>
+                      <td class="p-2 py-4 md:text-lg myanmarfont">${hymn.categoryName}</td>
+                      <td class="p-2 py-4 hidden md:block">${hymn.author}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="6" class="border-b border-gray-200"></td>
+                    </tr>
+                  `
+                    )
+                    .join("")}
+                </tbody>
+              </table>
+            `;
+      };
+      const fetchHymnsByName = async (hymnName) => {
+        try {
+          // Clear the container before appending new data
+          hymnsContainer.innerHTML = "";
+
+          // Show the loading indicator inside hymns div
+          hymnsContainer.innerHTML = `
+                    <div id="filterLoading" class="text-[#E2E46E] h-[300px] font-bold text-xl italic">
+                        Loading hymns...
+                    </div>
+                `;
+
+          // Update the URL with the hymn name parameter
+          const url = new URL(window.location.href);
+          url.searchParams.set("hymnname", hymnName);
+          url.searchParams.set("page", page);
+          window.history.pushState({}, "", url);
+
+          // Fetch the hymns based on the hymn name
+          const response = await fetch(
+            `${backendApi}/hymns.php?page=${page}&hymnname=${hymnName}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          const hymns = await data.hymns;
+
+          // Clear the loading indicator
+          hymnsContainer.innerHTML = "";
+
+          // Map through hymns and display them
+          if (hymns.length > 0) {
+            insertHymns(hymns);
+          } else {
+            hymnsContainer.innerHTML = `
+              <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
+            `;
+          }
+        } catch (error) {
+          console.error("Failed to fetch hymns:", error);
+          hymnsContainer.innerHTML = `
+                    <p class="text-[#E2E46E] text-center font-bold italic">Failed to load hymns. Please try again later.</p>
+                `;
+        }
+      };
+
+      // Function to fetch all hymns on page load
+      const fetchHymns = async () => {
+        try {
+          // Show the loading screen
+          loadingScreen.classList.remove("hidden");
+          loadingScreen.classList.add("flex");
+
+          const url = new URL(window.location.href);
+
+          if (url.searchParams.has("hymnname")) {
+            url.searchParams.delete("hymnname");
+          }
+          url.searchParams.set("page", page);
+          window.history.pushState({}, "", url);
+
+          // Fetch all hymns
+          const response = await fetch(`${backendApi}/hymns.php?page=${page}`);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          const hymns = await data.hymns;
+          page = await data.current_page;
+          total_page = await data.total_pages;
+
+          hymnsContainer.innerHTML = "";
+          // Display all hymns
+          if (hymns.length > 0) {
+            insertHymns(hymns);
+          } else {
+            hymnsContainer.innerHTML = `
+              <p class="text-[#E2E46E] font-bold italic">No hymns found.</p>
+            `;
+          }
+        } catch (error) {
+          console.error("Failed to fetch hymns:", error);
+        } finally {
+          // Hide the loading screen
+          loadingScreen.classList.remove("flex");
+          loadingScreen.classList.add("hidden");
+        }
+      };
+
+      // Event listener for the input field to trigger fetchHymnsByName on keyup
+      hymnInput.addEventListener("keyup", (event) => {
+        const hymnName = event.target.value;
+        if (hymnName) {
+          fetchHymnsByName(hymnName);
+        } else {
+          fetchHymns();
+        }
+      });
+
+      // Fetch hymns on page load
+      window.onload = () => {
+        prev.addEventListener("click", () => {
+          if (page > 1) {
+            page--;
+            fetchHymns();
+          }
+        });
+
+        next.addEventListener("click", () => {
+          if (total_page > page) {
+            page++;
+            fetchHymns();
+          }
+        });
+        const urlParams = new URLSearchParams(window.location.search);
+        const hymnName = urlParams.get("hymnname") || "";
+        hymnInput.value = hymnName; // Set input value to hymn name from URL
+        if (hymnName) {
+          fetchHymnsByName(hymnName);
+        } else {
+          fetchHymns();
+        }
+      };
+
+      const openNumberModal = () => {
+        numberModal.classList.toggle("pointer-events-none");
+        numberModal.classList.toggle("opacity-0");
+        numberModal.classList.toggle("opacity-100");
+        body.classList.toggle("overflow-x-hidden");
+        body.classList.toggle("overflow-hidden");
+      };
+
+      gear.addEventListener("click", () => {
+        openNumberModal();
+      });
+
+      closeMenu.addEventListener("click", () => {
+        openNumberModal();
+      })
+
+      //search by number
+      const enterNumber = (number) => {
+        const input = document.getElementById('hymnIdInput');
+        input.value += number; // Append the number
+      };
+
+      // Function to clear the input field
+      const clearNumber = () => {
+        const input = document.getElementById('hymnIdInput');
+        input.value = ''; // Clear input field
+      };
+
+      // Function to search hymn by ID
+      const searchHymn = () => {
+        const hymnId = document.getElementById('hymnIdInput').value;
+        
+        if (hymnId) {
+            // Navigate to the hymn.html page with the hymn ID in the query parameter
+            location.href = `hymn.html?id=${hymnId}`;
+        } else {
+            alert('Please enter a Hymn ID');
+        }
+      };
+
+
+    </script>
+  </body>
+</html>
