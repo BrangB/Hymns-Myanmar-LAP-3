@@ -62,10 +62,10 @@
 
         // Function to fetch hymn details based on hymnId
         const fetchHymns = async (hymnId) => {
+            const mainContainer = document.querySelector(".mainContainer");
+            const loadingScreen = document.getElementById("loadingScreen");
+            const hymnBody = document.querySelector(".hymnBody");
             try {
-                const loadingScreen = document.getElementById("loadingScreen");
-                const mainContainer = document.querySelector(".mainContainer");
-                const hymnBody = document.querySelector(".hymnBody");
 
                 loadingScreen.classList.remove("hidden");
                 loadingScreen.classList.add("flex");
