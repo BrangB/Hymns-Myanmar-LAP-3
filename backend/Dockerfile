@@ -4,7 +4,7 @@ FROM php:8.1-apache
 # Copy your application code to the /var/www/html directory
 COPY . /var/www/html/
 
-# Install any dependencies if required
+# Install any dependencies if required.
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
